@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# PyTorch / training artifacts
+checkpoints/
+checkpoint/
+*.pt
+*.pth
+*.ckpt
+
+# Data files
+*.npy
+*.npz
+*.bin
+edu_fineweb10B/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
