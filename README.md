@@ -35,7 +35,6 @@ GPT/
 │   ├── infer.py
 │   ├── model.py
 │   ├── utils.py
-│   └── __pycache__/
 ├── train.py
 ├── requirements.txt
 └── README.md
