@@ -19,6 +19,7 @@ The project reconstructs the GPT-2 decoder-only transformer using PyTorch and or
 - Causal self-attention with scaled dot-product attention
 - Pre-LayerNorm residual blocks and GELU-based MLP layers
 - Learned positional embeddings and tied input/output embeddings
+- Loading of public pretrained OpenAI GPT-2 weights, verified against the Hugging Face implementation
 - Data preparation pipeline for tokenizing and storing training shards
 - Training loop with gradient accumulation and checkpoint saving
 - Inference script for text generation with Top-K sampling
@@ -36,6 +37,8 @@ GPT/
 │   ├── model.py
 │   ├── utils.py
 │   └── __pycache__/
+├── tests/
+│   └── test_pretrained.py
 ├── train.py
 ├── requirements.txt
 └── README.md
@@ -105,6 +108,26 @@ python src/infer.py \
   --num_sequences 4
 ```
 
+### Using Pretrained GPT-2 Weights
+
+The model can also load the original OpenAI GPT-2 weights (via Hugging Face) directly into the from-scratch architecture, without any checkpoint:
+
+```bash
+python src/infer.py \
+  --pretrained gpt2 \
+  --prompt "Hello, I'm a language model," \
+  --max_length 64 \
+  --num_sequences 4
+```
+
+Supported model types are `gpt2` (124M), `gpt2-medium` (350M), `gpt2-large` (774M), and `gpt2-xl` (1558M).
+
+The weight loading is verified by comparing output logits against the reference Hugging Face `GPT2LMHeadModel` on identical inputs, with a maximum absolute difference below 1e-3 (attributable to floating-point ordering differences in the attention implementation). The verification test can be run with:
+
+```bash
+python -m tests.test_pretrained
+```
+
 ## Model Architecture
 
 The default configuration is aligned with a GPT-2-style 124M parameter setup.
@@ -129,6 +152,7 @@ The default configuration is aligned with a GPT-2-style 124M parameter setup.
 - PyTorch
 - `tiktoken`
 - Hugging Face Datasets
+- Hugging Face Transformers (pretrained weight loading only)
 - NumPy
 - `tqdm`
 
@@ -137,6 +161,7 @@ The default configuration is aligned with a GPT-2-style 124M parameter setup.
 - The training loop uses mixed precision with `bfloat16` where supported.
 - `torch.compile` is used in the training path for performance-oriented execution.
 - Checkpoint loading removes the `_orig_mod.` prefixes introduced by compilation to preserve compatibility.
+- Pretrained weight loading transposes the Hugging Face `Conv1D` layers into `nn.Linear` format and skips the non-learnable attention mask buffers.
 
 ## Future Work
 
@@ -144,7 +169,6 @@ Possible next steps include:
 
 - Adding KV-cache support for faster inference
 - Adding evaluation benchmarks such as HellaSwag
-- Supporting loading public pretrained GPT-2 weights
 - Improving the training and data pipeline for larger runs
 
 ## License
