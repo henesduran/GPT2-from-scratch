@@ -50,7 +50,8 @@ def main():
     parser.add_argument(
         "--checkpoint",
         type=str,
-        required=True,
+        required=False,
+        default=None,
         help="Path to the checkpoint file to be loaded (.pt or .zip)",
     )
     parser.add_argument(
@@ -65,18 +66,30 @@ def main():
     parser.add_argument(
         "--num_sequences", type=int, default=4, help="Number of sequences to be generated"
     )
-    parser.add_argument("--seed", type=int, default=42, help="Random seed")
+    parser.add_argument(
+        "--seed", type=int, default=42, help="Random seed"
+        )
+    parser.add_argument("--pretrained", type=str, default=None,
+                    choices=["gpt2", "gpt2-medium", "gpt2-large", "gpt2-xl"],
+                    help="Load OpenAI pretrained weights instead of a checkpoint"
+    )
     args = parser.parse_args()
 
     device = get_device()
     print(f"Using device: {device}")
 
-    # load checkpoint
-    checkpoint = load_checkpoint(args.checkpoint, device=device)
-    config = checkpoint["config"]
+    if args.pretrained is not None:
+        model = GPT.from_pretrained(args.pretrained)
+    elif args.checkpoint is not None:
+        # load checkpoint
+        checkpoint = load_checkpoint(args.checkpoint, device=device)
+        config = checkpoint["config"]
 
-    model = GPT(config)
-    model.load_state_dict(checkpoint["model"])
+        model = GPT(config)
+        model.load_state_dict(checkpoint["model"])
+    else:
+        parser.error("Either --pretrained or --checkpoint must be provided")
+        
     model.to(device)
     model.eval() # put into evaluation mode,may affect behaviour
 

@@ -158,3 +158,50 @@ class GPT(nn.Module):
         optimizer = torch.optim.AdamW(optim_groups, lr=learning_rate, betas=(0.9, 0.95), eps=1e-8, fused=use_fused)
         return optimizer
 
+    @classmethod
+    def from_pretrained(cls,model_type : str):
+        """ loads original GPT-2 weights from HuggingFace """
+        assert model_type in {"gpt2", "gpt2-medium", "gpt2-large", "gpt2-xl"}
+        from transformers import GPT2LMHeadModel
+        print(f"Loading pretrained weights: {model_type}")
+
+        config_args = {
+        "gpt2":        dict(n_layer=12, n_head=12, n_embd=768),   # 124M
+        "gpt2-medium": dict(n_layer=24, n_head=16, n_embd=1024),  # 350M
+        "gpt2-large":  dict(n_layer=36, n_head=20, n_embd=1280),  # 774M
+        "gpt2-xl":     dict(n_layer=48, n_head=25, n_embd=1600),  # 1558M
+    }[model_type]
+        config_args["vocab_size"] = 50257
+        config_args["block_size"] = 1024
+
+        config = GPTConfig(**config_args)
+        model = cls(config)
+
+        sd = model.state_dict()
+
+        sd_keys = [k for k in sd.keys() if not k.endswith(".attn.bias")] #skip register buffers
+
+        model_hf = GPT2LMHeadModel.from_pretrained(model_type)
+        sd_hf = model_hf.state_dict()
+
+        sd_keys_hf = [k for k in sd_hf.keys()
+                  if not k.endswith(".attn.bias") # skip buffers from huggingface also
+                  and not k.endswith(".attn.masked_bias")]
+
+        #huggingface model is using a layer named Conv1D which does not exactly match with LinearLayer, thats why we transpose
+        transposed = ["attn.c_attn.weight", "attn.c_proj.weight",
+                  "mlp.c_fc.weight", "mlp.c_proj.weight"]
+
+        assert len(sd_keys) == len(sd_keys_hf), \
+        f"Number of keys do not match: {len(sd_keys)} != {len(sd_keys_hf)}"
+
+        with torch.no_grad():
+            for key in sd_keys_hf:
+                if any(key.endswith(t) for t in transposed):
+                    assert sd_hf[key].shape[::-1] == sd[key].shape,f"{key}: {sd_hf[key].shape} vs {sd[key].shape}"
+                    sd[key].copy_(sd_hf[key].t()) # copy transposed version
+                else:
+                    assert sd_hf[key].shape == sd[key].shape,f"{key}: {sd_hf[key].shape} vs {sd[key].shape}"
+                    sd[key].copy_(sd_hf[key])
+        return model
+

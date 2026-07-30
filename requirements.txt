@@ -3,3 +3,4 @@ numpy>=1.26.0
 tiktoken>=0.8.0
 datasets>=2.20.0
 tqdm>=4.4.0
+transformers>=4.40.0
