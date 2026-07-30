@@ -101,7 +101,7 @@ For multi-GPU training, the script can also be launched with `torchrun`.
 To generate text from a saved checkpoint:
 
 ```bash
-python src/infer.py \
+python -m src.infer \
   --checkpoint checkpoint/model_00049.pt \
   --prompt "Hello, I'm a language model," \
   --max_length 64 \
@@ -113,7 +113,7 @@ python src/infer.py \
 The model can also load the original OpenAI GPT-2 weights (via Hugging Face) directly into the from-scratch architecture, without any checkpoint:
 
 ```bash
-python src/infer.py \
+python -m src.infer \
   --pretrained gpt2 \
   --prompt "Hello, I'm a language model," \
   --max_length 64 \
@@ -125,7 +125,7 @@ Supported model types are `gpt2` (124M), `gpt2-medium` (350M), `gpt2-large` (774
 The weight loading is verified by comparing output logits against the reference Hugging Face `GPT2LMHeadModel` on identical inputs, with a maximum absolute difference below 1e-3 (attributable to floating-point ordering differences in the attention implementation). The verification test can be run with:
 
 ```bash
-python -m tests.test_pretrained
+python -m pytest tests/test_pretrained.py
 ```
 
 ## Model Architecture
