@@ -20,6 +20,7 @@ The project reconstructs the GPT-2 decoder-only transformer using PyTorch and or
 - Pre-LayerNorm residual blocks and GELU-based MLP layers
 - Learned positional embeddings and tied input/output embeddings
 - Loading of public pretrained OpenAI GPT-2 weights, verified against the Hugging Face implementation
+- HellaSwag evaluation harness (acc / acc_norm), reproducing the reference 29.5% acc_norm for GPT-2 124M
 - Data preparation pipeline for tokenizing and storing training shards
 - Training loop with gradient accumulation and checkpoint saving
 - Inference script for text generation with Top-K sampling
@@ -33,6 +34,7 @@ GPT/
 │   └── prepare_data.py
 ├── src/
 │   ├── data.py
+│   ├── hellaswag.py
 │   ├── infer.py
 │   ├── model.py
 │   ├── utils.py
@@ -128,6 +130,24 @@ The weight loading is verified by comparing output logits against the reference 
 python -m pytest tests/test_pretrained.py
 ```
 
+## Evaluation
+
+The HellaSwag evaluation script can be run directly from the repository root:
+
+```bash
+python -m src.hellaswag --pretrained gpt2
+```
+
+Observed results in this environment:
+
+| Metric | Value |
+| :--- | :---: |
+| Examples | 10042 |
+| acc | 0.2858 |
+| acc_norm | 0.2955 |
+
+These values are the measured output from the current run and are used as the reference for the reproduction claim in this repository.
+
 ## Model Architecture
 
 The default configuration is aligned with a GPT-2-style 124M parameter setup.
@@ -168,7 +188,6 @@ The default configuration is aligned with a GPT-2-style 124M parameter setup.
 Possible next steps include:
 
 - Adding KV-cache support for faster inference
-- Adding evaluation benchmarks such as HellaSwag
 - Improving the training and data pipeline for larger runs
 
 ## License
