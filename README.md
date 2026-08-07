@@ -121,9 +121,9 @@ python train_lora.py \
   --max_steps 500 --max_lr 3e-4
 ```
 
-Checkpoints saved this way contain only the adapter weights plus the hyperparameters needed to reconstruct it (`r`, `alpha`, target layer names) — not the full model — so they stay small regardless of base model size.
+Checkpoints saved this way contain only the adapter weights plus the hyperparameters needed to reconstruct it (`r`, `alpha`, target layer names), not the full model, so they stay small regardless of base model size.
 
-A worked example — LoRA-adapting this English-pretrained GPT-2 to Turkish, and measuring how LoRA rank trades off Turkish quality against forgetting on HellaSwag — is written up in [`TURKISH_LORA_STUDY.md`](TURKISH_LORA_STUDY.md).
+A worked example (LoRA-adapting this English-pretrained GPT-2 to Turkish, and measuring how LoRA rank trades off Turkish quality against forgetting on HellaSwag) is written up in [`TURKISH_LORA_STUDY.md`](TURKISH_LORA_STUDY.md).
 
 ## Inference
 
