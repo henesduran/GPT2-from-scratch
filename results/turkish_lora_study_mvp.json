@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "pretrained": "gpt2",
+    "data_dir": "data/turkish_wiki_mvp",
+    "alpha_ratio": 2.0,
+    "train_args": {
+      "batch_size": 4,
+      "block_size": 1024,
+      "total_batch_size": 32768,
+      "max_steps": 500,
+      "warmup_steps": 50,
+      "max_lr": 0.0003,
+      "weight_decay": 0.1,
+      "lora_dropout": 0.0,
+      "seed": 1337
+    },
+    "hellaswag_limit": 2000
+  },
+  "baseline": {
+    "hellaswag_limited": {
+      "limit": 2000,
+      "acc": 0.326,
+      "acc_norm": 0.3365
+    },
+    "hellaswag_full": {
+      "acc": 0.28579964150567616,
+      "acc_norm": 0.2954590718980283
+    },
+    "samples": {
+      "Türkiye'nin başkenti": "Türkiye'nin başkentiştakırızet (Fizy) in germany and from Türkçu in the south. \"The capital city of Berlin is also one of the capital cities that's been known for high quality of",
+      "Yapay zeka teknolojisi son yıllarda": "Yapay zeka teknolojisi son yıllarda.\n\nMorteza hizo cada zabul.\n\nVladimir zek konpokay na hanaşar kın zaşar,\n\nMort",
+      "Bilim insanları yeni bir": "Bilim insanları yeni birüşçağim hannıtıçanısıi\n\ndām ðe mensihanısıtı sertimêtı.\n\nsalığı, s",
+      "Osmanlı İmparatorluğu döneminde": "Osmanlı İmparatorluğu döneminde fünşdınıs vezları difotur.\n\nÇar, Anıl Özmşi İmparatorluğu.\n\n"
+    }
+  },
+  "ranks": [
+    {
+      "r": 1,
+      "alpha": 2,
+      "train_seconds": 631.926754951477,
+      "final_tok_per_sec": 25863.26,
+      "final_train_loss": 3.415632,
+      "final_val_loss": 3.8738,
+      "checkpoint_path": "checkpoint/turkish_lora_study\\r1\\lora_00499.pt",
+      "hellaswag": {
+        "acc": 0.312,
+        "acc_norm": 0.3265
+      },
+      "forgetting_delta_acc_norm": 0.010000000000000009,
+      "samples": {
+        "Türkiye'nin başkenti": "Türkiye'nin başkenti.\n\nHıncanç tazarıçıdından danyon üzerine cösütalar dönemluştirimi. Ayağ, cösütanlar",
+        "Yapay zeka teknolojisi son yıllarda": "Yapay zeka teknolojisi son yıllarda kendişinde kag daha olarbollarda.\n\nSidney Küpçk, Türkiye Türkiye\n\nKöne Öld",
+        "Bilim insanları yeni bir": "Bilim insanları yeni bir korır: Türmanlığı (Sultana), sın İzli albıdır.\n Özinde çekçi, sın İzli al",
+        "Osmanlı İmparatorluğu döneminde": "Osmanlı İmparatorluğu döneminde Turgaylar İmparatorluğu edildi. İmparatorluğu lansımı ve olu çıldeçi.\n\nDaha"
+      }
+    },
+    {
+      "r": 4,
+      "alpha": 8,
+      "train_seconds": 654.4706573486328,
+      "final_tok_per_sec": 25212.03,
+      "final_train_loss": 3.11206,
+      "final_val_loss": 3.6105,
+      "checkpoint_path": "checkpoint/turkish_lora_study\\r4\\lora_00499.pt",
+      "hellaswag": {
+        "acc": 0.3115,
+        "acc_norm": 0.329
+      },
+      "forgetting_delta_acc_norm": 0.007500000000000007,
+      "samples": {
+        "Türkiye'nin başkenti": "Türkiye'nin başkentiği ve meyım diliği geri değişik cötleri kazanlarıntan bakımcın daha kurcu bir bir kamada gelaş",
+        "Yapay zeka teknolojisi son yıllarda": "Yapay zeka teknolojisi son yıllarda kademi ve cemek ile yazar köpselmek için kazan, ile yazar yahanda bakadın yazar, ile yarrada",
+        "Bilim insanları yeni bir": "Bilim insanları yeni bir gücüntür. En ülbersesi sertiğini, Sibirim kufti; Sibirim zener olarak süreliği ve yaşık yazar",
+        "Osmanlı İmparatorluğu döneminde": "Osmanlı İmparatorluğu döneminde nahid dörtler.\n\nDörtler kampisi, Çocuya önemleşler yapımcı carkı.\n\nDö"
+      }
+    },
+    {
+      "r": 8,
+      "alpha": 16,
+      "train_seconds": 664.7441067695618,
+      "final_tok_per_sec": 24924.97,
+      "final_train_loss": 2.955552,
+      "final_val_loss": 3.4903,
+      "checkpoint_path": "checkpoint/turkish_lora_study\\r8\\lora_00499.pt",
+      "hellaswag": {
+        "acc": 0.3145,
+        "acc_norm": 0.326
+      },
+      "forgetting_delta_acc_norm": 0.01050000000000001,
+      "samples": {
+        "Türkiye'nin başkenti": "Türkiye'nin başkentiği içinde başdır.\nİmparatorluk üzerinde başkentiği üzerinde Başkanı (Türkiye ſeh",
+        "Yapay zeka teknolojisi son yıllarda": "Yapay zeka teknolojisi son yıllarda çıklaştı.\n1930\n Şarkıcına Kültür - Aynık Yüksek olan yazarında çatı",
+        "Bilim insanları yeni bir": "Bilim insanları yeni bir güdüğü\n Sürer, Ezerli olanı yazarı cakatçı (p. 43)\n\nPairin İşk'ın küffe (1871, 18",
+        "Osmanlı İmparatorluğu döneminde": "Osmanlı İmparatorluğu döneminde niklere doğumlu, böylemeye tarişmenin hazın alıcığında niklere ist ve karafından"
+      }
+    },
+    {
+      "r": 16,
+      "alpha": 32,
+      "train_seconds": 680.265958070755,
+      "final_tok_per_sec": 24065.96,
+      "final_train_loss": 2.78504,
+      "final_val_loss": 3.3594,
+      "checkpoint_path": "checkpoint/turkish_lora_study\\r16\\lora_00499.pt",
+      "hellaswag": {
+        "acc": 0.3165,
+        "acc_norm": 0.321
+      },
+      "forgetting_delta_acc_norm": 0.015500000000000014,
+      "samples": {
+        "Türkiye'nin başkenti": "Türkiye'nin başkenti değişik ve tic haket yapışı yapışdır. Bu rektürlarına aktör için olarak olimtisiyle \"Dismatolog",
+        "Yapay zeka teknolojisi son yıllarda": "Yapay zeka teknolojisi son yıllarda, oluşau, kâçılan yavam etti.\n\nİçilir gezinde \n Şiİm \n İstanbul Şi",
+        "Bilim insanları yeni bir": "Bilim insanları yeni birçok geçerimindeki korun uydımcısını'na başçında \"Pekin, Şuvan ve Paşa\" (1850′-19) ort",
+        "Osmanlı İmparatorluğu döneminde": "Osmanlı İmparatorluğu döneminde geçmiş insanılığı kadar mücük eşitli ve haftik edilililtim.\n\n2080 - İtalyan"
+      }
+    },
+    {
+      "r": 32,
+      "alpha": 64,
+      "train_seconds": 678.9321377277374,
+      "final_tok_per_sec": 23501.02,
+      "final_train_loss": 2.624388,
+      "final_val_loss": 3.2272,
+      "checkpoint_path": "checkpoint/turkish_lora_study\\r32\\lora_00499.pt",
+      "hellaswag": {
+        "acc": 0.3145,
+        "acc_norm": 0.3235
+      },
+      "forgetting_delta_acc_norm": 0.013000000000000012,
+      "samples": {
+        "Türkiye'nin başkenti": "Türkiye'nin başkenti ve yılından iki ekonomisi geçirilir. Yeni olarak geçişne yaptı.\n\nKurdistan'in gecebili ve sultanunu",
+        "Yapay zeka teknolojisi son yıllarda": "Yapay zeka teknolojisi son yıllarda, zekinlerinin meydana görüşe kendi İran doğal tayolojisi, Türk sözleçenlerine yıuflam",
+        "Bilim insanları yeni bir": "Bilim insanları yeni bir yerelikin inetiyoryacı (Ölümüle) insanlar (d. 1439)\n 18. Çeşen\n Aynık \n1912 - Dünya",
+        "Osmanlı İmparatorluğu döneminde": "Osmanlı İmparatorluğu döneminde ortaya da fiziklerinde yöneliktir.\n\nHappiye çeşitli davek yönetmenların yayır"
+      }
+    }
+  ]
+}
