@@ -23,6 +23,7 @@ The project reconstructs the GPT-2 decoder-only transformer using PyTorch and or
 - HellaSwag evaluation harness (acc / acc_norm), reproducing the reference 29.5% acc_norm for GPT-2 124M
 - Data preparation pipeline for tokenizing and storing training shards
 - Training loop with gradient accumulation and checkpoint saving
+- LoRA (Low-Rank Adaptation) fine-tuning: freeze the base model and train small rank-`r` adapters on `c_attn`/`c_proj`/`c_fc`, with adapter-only checkpointing and merge-back support
 - Inference script for text generation with Top-K sampling
 - Mixed precision support and Torch compilation in training
 
@@ -31,18 +32,24 @@ The project reconstructs the GPT-2 decoder-only transformer using PyTorch and or
 ```text
 GPT/
 ├── scripts/
-│   └── prepare_data.py
+│   ├── prepare_data.py
+│   ├── tokenizer_efficiency.py
+│   ├── turkish_lora_study.py
+│   └── plot_turkish_lora_study.py
 ├── src/
 │   ├── data.py
 │   ├── hellaswag.py
 │   ├── infer.py
+│   ├── lora.py
 │   ├── model.py
-│   ├── utils.py
-│   └── __pycache__/
+│   └── utils.py
 ├── tests/
-│   └── test_pretrained.py
+│   ├── test_pretrained.py
+│   └── test_lora.py
 ├── train.py
+├── train_lora.py
 ├── requirements.txt
+├── TURKISH_LORA_STUDY.md
 └── README.md
 ```
 
@@ -97,6 +104,26 @@ python train.py \
 ```
 
 For multi-GPU training, the script can also be launched with `torchrun`.
+
+### LoRA Fine-tuning
+
+`train_lora.py` fine-tunes a pretrained GPT-2 with LoRA instead of full fine-tuning: the base weights are frozen and only small rank-`r` adapter matrices on `c_attn`/`c_proj`/`c_fc` are trained, saved, and checkpointed (`src/lora.py`, `src/utils.py::save_lora_checkpoint`/`load_lora_adapter`).
+
+Example:
+
+```bash
+python train_lora.py \
+  --pretrained gpt2 \
+  --data_dir data/turkish_wiki_mvp \
+  --log_dir checkpoint/lora_run \
+  --lora_r 8 --lora_alpha 16 --lora_dropout 0.0 \
+  --batch_size 4 --block_size 1024 --total_batch_size 32768 \
+  --max_steps 500 --max_lr 3e-4
+```
+
+Checkpoints saved this way contain only the adapter weights plus the hyperparameters needed to reconstruct it (`r`, `alpha`, target layer names) — not the full model — so they stay small regardless of base model size.
+
+A worked example — LoRA-adapting this English-pretrained GPT-2 to Turkish, and measuring how LoRA rank trades off Turkish quality against forgetting on HellaSwag — is written up in [`TURKISH_LORA_STUDY.md`](TURKISH_LORA_STUDY.md).
 
 ## Inference
 
