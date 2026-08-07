@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "pretrained": "gpt2",
+    "data_dir": "data/turkish_wiki_full",
+    "alpha_ratio": 2.0,
+    "train_args": {
+      "batch_size": 4,
+      "block_size": 1024,
+      "total_batch_size": 32768,
+      "max_steps": 1000,
+      "warmup_steps": 100,
+      "max_lr": 0.0003,
+      "weight_decay": 0.1,
+      "lora_dropout": 0.0,
+      "seed": 1337
+    },
+    "hellaswag_limit": 10042
+  },
+  "baseline": {
+    "hellaswag_limited": {
+      "limit": 10042,
+      "acc": 0.28579964150567616,
+      "acc_norm": 0.2954590718980283
+    },
+    "samples": {
+      "Türkiye'nin başkenti": "Türkiye'nin başkentiştakırızet (Fizy) in germany and from Türkçu in the south. \"The capital city of Berlin is also one of the capital cities that's been known for high quality of",
+      "Yapay zeka teknolojisi son yıllarda": "Yapay zeka teknolojisi son yıllarda.\n\nMorteza hizo cada zabul.\n\nVladimir zek konpokay na hanaşar kın zaşar,\n\nMort",
+      "Bilim insanları yeni bir": "Bilim insanları yeni birüşçağim hannıtıçanısıi\n\ndām ðe mensihanısıtı sertimêtı.\n\nsalığı, s",
+      "Osmanlı İmparatorluğu döneminde": "Osmanlı İmparatorluğu döneminde fünşdınıs vezları difotur.\n\nÇar, Anıl Özmşi İmparatorluğu.\n\n"
+    }
+  },
+  "ranks": [
+    {
+      "r": 1,
+      "alpha": 2,
+      "train_seconds": 1286.0889167785645,
+      "final_tok_per_sec": 26377.56,
+      "final_train_loss": 3.34434,
+      "final_val_loss": 3.5909,
+      "checkpoint_path": "checkpoint/turkish_lora_study_full\\r1\\lora_00999.pt",
+      "hellaswag": {
+        "acc": 0.2795259908384784,
+        "acc_norm": 0.2907787293367855
+      },
+      "forgetting_delta_acc_norm": 0.0046803425612427785,
+      "samples": {
+        "Türkiye'nin başkenti": "Türkiye'nin başkentiği bütüt kademise içe eğilmiştir. Bu yazıl kalın iki üzere bırasay büyük kurlaş",
+        "Yapay zeka teknolojisi son yıllarda": "Yapay zeka teknolojisi son yıllarda olan yapmaştır. Zavastan olan değişimden zalummaştır, araşkisi kullanılmarda",
+        "Bilim insanları yeni bir": "Bilim insanları yeni bir yöst. Filer de geldesinden olarak yöst. Bu bağlanmasından bu yöst. Höshalden çalışmalarının ilk",
+        "Osmanlı İmparatorluğu döneminde": "Osmanlı İmparatorluğu dönemindeğim gibi alanları oluşturulumu höyüz çığı olarak çiyası başladı.\n\nBöl"
+      }
+    },
+    {
+      "r": 4,
+      "alpha": 8,
+      "train_seconds": 1266.619720697403,
+      "final_tok_per_sec": 22651.65,
+      "final_train_loss": 3.131314,
+      "final_val_loss": 3.4104,
+      "checkpoint_path": "checkpoint/turkish_lora_study_full\\r4\\lora_00999.pt",
+      "hellaswag": {
+        "acc": 0.2802230631348337,
+        "acc_norm": 0.2874925313682533
+      },
+      "forgetting_delta_acc_norm": 0.007966540529774968,
+      "samples": {
+        "Türkiye'nin başkenti": "Türkiye'nin başkentiği böylecekedir.\n\nBirli ve konumak\nYüzek Şiklesinin seçerli bir dönemini oluşturur, başk",
+        "Yapay zeka teknolojisi son yıllarda": "Yapay zeka teknolojisi son yıllarda, ikinci konusunda kadar son ise, ekonomimleri kendirillen Könyat kendisinde yer alınısı",
+        "Bilim insanları yeni bir": "Bilim insanları yeni birçok bilhi büyün kurarınlarına geçmen gelişmişti. Şehir bilme hale sonrasından ayrıca verilen çok",
+        "Osmanlı İmparatorluğu döneminde": "Osmanlı İmparatorluğu döneminde sonra yerini kuruluk birçok olup değerlümüzde de buzıkları da katılmıştır. �"
+      }
+    },
+    {
+      "r": 8,
+      "alpha": 16,
+      "train_seconds": 1279.9121074676514,
+      "final_tok_per_sec": 25413.07,
+      "final_train_loss": 3.021068,
+      "final_val_loss": 3.312,
+      "checkpoint_path": "checkpoint/turkish_lora_study_full\\r8\\lora_00999.pt",
+      "hellaswag": {
+        "acc": 0.28251344353714397,
+        "acc_norm": 0.28540131447918743
+      },
+      "forgetting_delta_acc_norm": 0.010057757418840851,
+      "samples": {
+        "Türkiye'nin başkenti": "Türkiye'nin başkentiği açtıkça hin yüksekleri üç karşısında doğusunda göre kurulanız sonucu üzere aç",
+        "Yapay zeka teknolojisi son yıllarda": "Yapay zeka teknolojisi son yıllarda çalışmalarılmış içinde hükûmetler (cölayo) kapında, yapasasının bakı",
+        "Bilim insanları yeni bir": "Bilim insanları yeni bir kazarsiyo olup inşamından üzerine sonra başkanların yerleşmesi yedirmesinin yaygın kararının y",
+        "Osmanlı İmparatorluğu döneminde": "Osmanlı İmparatorluğu döneminde anandığı ülkenin cebi yapılan sonucu. Bu bulunan, Bosphorus (R. H. Jeezy, 1883) yapt"
+      }
+    },
+    {
+      "r": 16,
+      "alpha": 32,
+      "train_seconds": 1321.277714729309,
+      "final_tok_per_sec": 24684.78,
+      "final_train_loss": 2.887078,
+      "final_val_loss": 3.1726,
+      "checkpoint_path": "checkpoint/turkish_lora_study_full\\r16\\lora_00999.pt",
+      "hellaswag": {
+        "acc": 0.27982473610834496,
+        "acc_norm": 0.285700059749054
+      },
+      "forgetting_delta_acc_norm": 0.009759012148974289,
+      "samples": {
+        "Türkiye'nin başkenti": "Türkiye'nin başkenti, çok çöşvünün enfirdi.\n\nİlgün, sevfeddesiği, yayınlıklığı ile ilg",
+        "Yapay zeka teknolojisi son yıllarda": "Yapay zeka teknolojisi son yıllarda yer alan dağılmak veya olan süreciği kadar birine değişmedi ve konumluların üzerli da",
+        "Bilim insanları yeni bir": "Bilim insanları yeni bir yönetimalı arasından yanı sıra ülke topluluğu ile bulunmaktadır. Yüzyıllar oğlu, birçok g",
+        "Osmanlı İmparatorluğu döneminde": "Osmanlı İmparatorluğu döneminde sağlar bulunduğu aynı karşı değiştirilmiştir. Güney çekilen il iki kadın d"
+      }
+    },
+    {
+      "r": 32,
+      "alpha": 64,
+      "train_seconds": 1421.2693316936493,
+      "final_tok_per_sec": 20803.54,
+      "final_train_loss": 2.728551,
+      "final_val_loss": 3.0095,
+      "checkpoint_path": "checkpoint/turkish_lora_study_full\\r32\\lora_00999.pt",
+      "hellaswag": {
+        "acc": 0.2808205536745668,
+        "acc_norm": 0.286795459071898
+      },
+      "forgetting_delta_acc_norm": 0.008663612826130263,
+      "samples": {
+        "Türkiye'nin başkenti": "Türkiye'nin başkenti ve çok örnekleri başkanlık sırada gösteren örneği alan sonraki başkentindeki ayrınlanacağ",
+        "Yapay zeka teknolojisi son yıllarda": "Yapay zeka teknolojisi son yıllarda, sık bölgesel kullanılmaktadır.\n\nGiri Çong dariye dövde, giri Çong gerek k",
+        "Bilim insanları yeni bir": "Bilim insanları yeni bir ülking oluplarına ilk insanlarına görülmek için de etkilerinin görülmektedir.\n\nİlçe \n\n",
+        "Osmanlı İmparatorluğu döneminde": "Osmanlı İmparatorluğu döneminde Konya (Lüküçü) sahnyanın yapılan kângardeşlerle birlikte bulunan ilginli bir albüm"
+      }
+    }
+  ]
+}
