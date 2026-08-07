@@ -1,0 +1,18 @@
+{
+  "tokenizer": "tiktoken gpt2",
+  "english": {
+    "docs": 200,
+    "words": 4522,
+    "tokens": 5077,
+    "tokens_per_word": 1.1227333038478549,
+    "bytes_per_token": 4.517628520779988
+  },
+  "turkish": {
+    "docs": 200,
+    "words": 347204,
+    "tokens": 1303931,
+    "tokens_per_word": 3.7555183696040366,
+    "bytes_per_token": 2.2439768668740907
+  },
+  "turkish_inefficiency_ratio": 3.3449781499604994
+}

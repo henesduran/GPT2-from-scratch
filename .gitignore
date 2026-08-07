@@ -24,6 +24,9 @@ checkpoint/
 *.bin
 edu_fineweb10B/
 
+# Training run logs
+runs/
+
 # OS files
 .DS_Store
 Thumbs.db

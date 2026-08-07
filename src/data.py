@@ -8,7 +8,7 @@ def load_tokens(filename):
     return ptt
 
 class DataLoaderLite:
-    def __init__(self, B, T, process_rank, num_processes, split, data_root="edu_fineweb10B"):
+    def __init__(self, B, T, split, data_root="edu_fineweb10B", process_rank=0, num_processes=1):
         self.B = B
         self.T = T
         self.process_rank = process_rank
